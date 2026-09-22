@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
 import { cn } from "@/lib/utils";
 import { motionTokens, springs } from "@/lib/motion-tokens";
+import { useMounted } from "@/hooks/use-mounted";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 
@@ -25,7 +26,13 @@ const variantClasses: Record<ButtonVariant, string> = {
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", children, ...props }, ref) => {
+    // Gesture-Props (whileHover/whileTap) erst nach dem Mount aktivieren:
+    // useReducedMotion() liefert serverseitig/beim ersten Client-Render `null`,
+    // motion/react verdrahtet Gesten serverseitig anders als clientseitig –
+    // ohne dieses Gate entsteht ein Hydration-Mismatch (siehe motion-foundations).
+    const mounted = useMounted();
     const reduce = useReducedMotion();
+    const enableMotion = mounted && !reduce;
 
     return (
       <motion.button
@@ -37,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         whileHover={
-          reduce
+          !enableMotion
             ? undefined
             : variant === "primary"
               ? {
@@ -47,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 }
               : { y: -2, backgroundColor: "var(--color-muted)" }
         }
-        whileTap={reduce ? undefined : { scale: motionTokens.scale.press }}
+        whileTap={enableMotion ? { scale: motionTokens.scale.press } : undefined}
         transition={springs.snappy}
         {...props}
       >
