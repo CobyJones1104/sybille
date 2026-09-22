@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  /* Farben – siehe design-system/sybilles-naehparadies/MASTER.md */
+  --color-primary: #a85c1a;
+  --color-primary-hover: #8f4a14;
+  --color-on-primary: #ffffff;
+  --color-secondary: #6b7b3c;
+  --color-background: #fbf7f0;
+  --color-background-alt: #f1e7d8;
+  --color-foreground: #362a22;
+  --color-card: #ffffff;
+  --color-muted: #efe4d3;
+  --color-muted-foreground: #6b5d4f;
+  --color-border: #e4d5be;
+  --color-destructive: #b3261e;
+  --color-ring: #a85c1a;
+
+  /* Motion-Timing-Tokens */
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+  --motion-slow: 400ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-on-primary: var(--color-on-primary);
+  --color-secondary: var(--color-secondary);
+  --color-background: var(--color-background);
+  --color-background-alt: var(--color-background-alt);
+  --color-foreground: var(--color-foreground);
+  --color-card: var(--color-card);
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-border: var(--color-border);
+  --color-destructive: var(--color-destructive);
+  --color-ring: var(--color-ring);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe-transition {
+    transition: opacity 0.15s;
+  }
+  .motion-reduce-transform {
+    transform: none !important;
+    animation: none !important;
+  }
+}

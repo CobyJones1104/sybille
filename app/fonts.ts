@@ -1,0 +1,16 @@
+import { Playfair_Display, Inter } from "next/font/google";
+
+// Lokal über next/font gebündelt (kein Google-Fonts-CDN-Request), siehe CLAUDE.md.
+export const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+export const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
