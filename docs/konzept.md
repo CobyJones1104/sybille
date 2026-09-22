@@ -197,6 +197,7 @@ Besonderheit Meterware: Versandkosten ggf. gewichtsabhängig staffeln (schwere S
 3. Ist die Telefonnummer 0160 97955075 final bestätigt?
 4. Rechtsform des Geschäfts (Einzelunternehmen, e. K. …) und USt-IdNr./Steuernummer fürs Impressum?
 5. Sollen Rechtstexte (AGB, Widerruf, Datenschutz) über einen Rechtstexte-Anbieter (z. B. IT-Recht Kanzlei, e-recht24) bezogen werden? *(Empfehlung: ja – siehe Skill `website-dsgvo`, keine Rechtsberatung durch uns)*
+5a. **Wichtig, rechtlich zu prüfen:** Gilt für zugeschnittene Meterware eine Ausnahme vom gesetzlichen Widerrufsrecht als Sonderanfertigung (individueller Zuschnitt nach Kundenwunsch)? Muss vor Fertigstellung der Widerrufsbelehrung geklärt werden (siehe `app/widerruf/page.tsx`).
 
 **Laden & Geschichte**
 6. Seit wann gibt es den Laden, kurze Geschichte für „Über uns“?
