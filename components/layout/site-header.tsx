@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { springs } from "@/lib/motion-tokens";
+import { useCart } from "@/components/cart/cart-context";
 
 const navLinks = [
   { href: "/shop", label: "Shop" },
@@ -15,6 +16,8 @@ const navLinks = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { cart } = useCart();
+  const itemCount = cart?.totalQuantity ?? 0;
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-background)]/95 backdrop-blur">
@@ -37,11 +40,16 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/shop"
-            aria-label="Warenkorb"
-            className="flex h-11 w-11 items-center justify-center rounded-full text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]"
+            href="/warenkorb"
+            aria-label={`Warenkorb${itemCount > 0 ? `, ${itemCount} Artikel` : ""}`}
+            className="relative flex h-11 w-11 items-center justify-center rounded-full text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]"
           >
             <ShoppingBag className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+            {itemCount > 0 && (
+              <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-primary)] px-1 text-[10px] font-semibold text-[var(--color-on-primary)]">
+                {itemCount}
+              </span>
+            )}
           </Link>
           <button
             type="button"

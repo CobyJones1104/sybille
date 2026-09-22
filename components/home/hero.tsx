@@ -52,13 +52,17 @@ export function Hero() {
           {...enter(0.15)}
           className="relative order-1 mx-auto aspect-square w-full max-w-sm md:order-2"
         >
+          {/*
+            Weiche Maske nach allen Seiten + warme Farbtonung, damit das Foto in
+            den Header übergeht statt als Rechteck aufzuliegen (docs/header-konzept/konzept.md).
+          */}
           <div
             className="relative h-full w-full overflow-hidden rounded-[2rem]"
             style={{
               maskImage:
-                "linear-gradient(to bottom left, black 55%, transparent 92%)",
+                "radial-gradient(ellipse 75% 75% at 55% 45%, black 45%, transparent 85%)",
               WebkitMaskImage:
-                "linear-gradient(to bottom left, black 55%, transparent 92%)",
+                "radial-gradient(ellipse 75% 75% at 55% 45%, black 45%, transparent 85%)",
             }}
           >
             <Image
@@ -68,6 +72,11 @@ export function Hero() {
               priority
               sizes="(min-width: 768px) 384px, 320px"
               className="object-cover"
+              style={{ filter: "sepia(0.45) saturate(0.8) contrast(1.05) brightness(0.95)" }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[var(--color-primary)] opacity-25 mix-blend-color"
             />
           </div>
         </motion.div>

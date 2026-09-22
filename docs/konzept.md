@@ -214,6 +214,7 @@ Besonderheit Meterware: Versandkosten ggf. gewichtsabhängig staffeln (schwere S
 13. Bereitstellungszeit für Click & Collect (sofort/gleicher Tag/1 Werktag)?
 14. Gibt es bereits eine Kasse/Warenwirtschaft (z. B. für Lagerbestand), die später angebunden werden soll, oder wird der Bestand direkt im neuen Shop-System gepflegt?
 15. Ungefähre Anzahl unterschiedlicher Artikel (für Aufwandsabschätzung der Produktpflege)?
+15a. Der Shopify-Code ist fertig (siehe `docs/shopify-setup.md`) – wer legt den kostenpflichtigen Shopify-Store an (Sybille selbst oder mit Unterstützung)?
 
 **Sonstiges**
 16. Social-Media-Kanäle (Instagram/Facebook) vorhanden, die verlinkt/eingebunden werden sollen?

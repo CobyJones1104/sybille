@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { playfair, inter } from "@/app/fonts";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { CartProvider } from "@/components/cart/cart-context";
 import { businessInfo, openingHours } from "@/lib/business-info";
 import "./globals.css";
 
@@ -44,9 +45,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
+        <CartProvider>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </CartProvider>
       </body>
     </html>
   );

@@ -10,13 +10,14 @@ export function Intro() {
   return (
     <section className="mx-auto max-w-4xl px-6 py-16 text-center sm:py-20">
       <Reveal>
-        <div className="mx-auto mb-6 h-16 w-16 overflow-hidden rounded-full ring-4 ring-[var(--color-background-alt)]">
+        <div className="mx-auto mb-6 h-20 w-20 overflow-hidden rounded-full ring-4 ring-[var(--color-background-alt)]">
           <Image
             src="/images/team/sybille-portraet.webp"
             alt="Sybille, Inhaberin von Sybille's Nähparadies"
-            width={64}
-            height={64}
+            width={80}
+            height={80}
             className="h-full w-full object-cover"
+            style={{ objectPosition: "52% 32%" }}
           />
         </div>
         <h2 className="text-2xl font-semibold sm:text-3xl">Willkommen bei mir im Laden</h2>

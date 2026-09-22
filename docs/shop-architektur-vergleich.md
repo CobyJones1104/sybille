@@ -34,5 +34,5 @@ Scheitert am wichtigsten Kriterium: Es gäbe kein fertiges Verwaltungswerkzeug f
 - **Barzahlung bei Abholung:** manuelle Zahlungsart, kombiniert mit Versandart „Abholung im Laden“. ✅
 - **Kreditkarte/Apple Pay/Google Pay:** werden schlicht nicht als Zahlungsmethode aktiviert. ✅ technisch problemlos ausschließbar
 
-## Nächster Schritt (erst nach Freigabe)
-Konkrete Shopify-Plan-Wahl, Storefront-API-Setup und Next.js-Frontend-Architektur werden erst in der Design-/Code-Phase festgelegt.
+## Umsetzungsstand
+Das Next.js-Frontend inkl. Storefront-API-Anbindung, Warenkorb und Meterware-Mengenlogik ist implementiert (`lib/shopify/`, `app/api/cart/`, `app/shop/`, `app/warenkorb/`). Es fehlt nur noch der eigentliche Shopify-Store samt Zugangsdaten – Schritt-für-Schritt-Anleitung dafür in `docs/shopify-setup.md`. Bis dahin läuft `/shop` automatisch im Demo-Modus mit den Beispielprodukten aus `docs/produkte-vorlage.csv`.
