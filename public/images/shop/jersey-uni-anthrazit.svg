@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+<defs>
+  <pattern id="kn" width="16" height="20" patternUnits="userSpaceOnUse">
+    <path d="M8 0C3 5 3 15 8 20M8 0c5 5 5 15 0 20" fill="none" stroke="#8d949c" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+    <path d="M0 10c4-5 4-5 8 0M16 10c-4-5-4-5-8 0" fill="none" stroke="#8d949c" stroke-width="1.6" opacity=".35"/>
+  </pattern></defs>
+<rect width="400" height="300" fill="#3c3f44"/>
+<rect width="400" height="300" fill="url(#kn)"/>
+</svg>

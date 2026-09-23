@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs><pattern id="gr" width="22" height="22" patternUnits="userSpaceOnUse">
+      <path d="M22 0H0v22" fill="none" stroke="#8a7358" stroke-opacity=".25" stroke-width="1"/>
+     </pattern></defs>
+<rect width="240" height="240" fill="#fbf7f0"/>
+<rect width="240" height="240" fill="url(#gr)"/>
+     <path d="M48 187.20000000000002 C 62.400000000000006 72, 124.80000000000001 43.199999999999996, 177.6 72
+              L 192 182.4 Z" fill="none" stroke="#a85c1a" stroke-width="3" stroke-dasharray="9 7" stroke-linejoin="round"/>
+     <circle cx="48" cy="187.20000000000002" r="4" fill="#a85c1a"/>
+     <circle cx="192" cy="182.4" r="4" fill="#a85c1a"/>
+</svg>

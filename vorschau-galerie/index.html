@@ -1,0 +1,446 @@
+<title>Sybille's Nähparadies</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --grund: #F7F5F2;
+    --flaeche: #FFFFFF;
+    --flaeche-still: #EFEBE5;
+    --tinte: #2A2622;
+    --tinte-still: #776E66;
+    --linie: #E3DDD5;
+    --linie-stark: #CFC6BB;
+    --akzent: #A85C1A;
+    --akzent-grund: #F3E6D8;
+    --schatten: 0 1px 2px rgba(42, 38, 34, .06), 0 8px 24px -12px rgba(42, 38, 34, .18);
+    --ui: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --grund: #1A1817;
+      --flaeche: #232020;
+      --flaeche-still: #2C2827;
+      --tinte: #EFE9E1;
+      --tinte-still: #A2988E;
+      --linie: #332F2D;
+      --linie-stark: #453F3C;
+      --akzent: #D58C42;
+      --akzent-grund: #3A2A18;
+      --schatten: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .7);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --grund: #1A1817;
+    --flaeche: #232020;
+    --flaeche-still: #2C2827;
+    --tinte: #EFE9E1;
+    --tinte-still: #A2988E;
+    --linie: #332F2D;
+    --linie-stark: #453F3C;
+    --akzent: #D58C42;
+    --akzent-grund: #3A2A18;
+    --schatten: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .7);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--grund);
+    color: var(--tinte);
+    font-family: var(--ui);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--akzent); outline-offset: 2px; border-radius: 3px; }
+
+  .huelle {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 28px 56px;
+  }
+
+  /* ---------- Kopf ---------- */
+  .kopf { border-bottom: 1px solid var(--linie); padding-bottom: 20px; }
+  .marke {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tinte-still);
+    margin: 0 0 10px;
+  }
+  .kopf h1 {
+    margin: 0;
+    font-size: clamp(24px, 4.4vw, 34px);
+    font-weight: 600;
+    letter-spacing: -.02em;
+    text-wrap: balance;
+  }
+  .kopf p {
+    margin: 10px 0 0;
+    max-width: 62ch;
+    color: var(--tinte-still);
+  }
+
+  /* ---------- Steuerung ---------- */
+  .steuerung {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding-block: 18px;
+  }
+  .zaehler {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--tinte-still);
+  }
+  .schalter {
+    display: inline-flex;
+    background: var(--flaeche-still);
+    border: 1px solid var(--linie);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .schalter button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--tinte-still);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .schalter button[aria-pressed="true"] {
+    background: var(--flaeche);
+    color: var(--tinte);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .12);
+  }
+
+  /* ---------- Aufbau ---------- */
+  .aufbau {
+    display: grid;
+    grid-template-columns: 208px minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .aufbau { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  }
+
+  /* ---------- Seitenliste ---------- */
+  .liste { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+  @media (max-width: 760px) {
+    .liste {
+      position: static;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+      margin-inline: -16px;
+      padding-inline: 16px;
+    }
+  }
+  .gruppe + .gruppe { margin-top: 20px; }
+  @media (max-width: 760px) {
+    .gruppe + .gruppe { margin-top: 0; }
+    .gruppe { display: contents; }
+  }
+  .gruppe h2 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--tinte-still);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  @media (max-width: 760px) { .gruppe h2 { display: none; } }
+  .gruppe ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+  @media (max-width: 760px) {
+    .gruppe ul { display: contents; }
+  }
+  .gruppe li { min-width: 0; }
+  @media (max-width: 760px) {
+    /* In der Chip-Zeile darf nichts schrumpfen – sonst werden die Namen abgeschnitten */
+    .gruppe li { flex: 0 0 auto; min-width: max-content; }
+  }
+  .reiter {
+    display: block;
+    width: 100%;
+    text-align: left;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--tinte-still);
+    font: inherit;
+    font-size: 14px;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .reiter:hover { background: var(--flaeche-still); color: var(--tinte); }
+  .reiter[aria-selected="true"] {
+    background: var(--akzent-grund);
+    color: var(--akzent);
+    font-weight: 500;
+  }
+  @media (max-width: 760px) {
+    .reiter {
+      width: auto;
+      border: 1px solid var(--linie);
+      background: var(--flaeche);
+      font-size: 13px;
+      padding: 6px 13px;
+      border-radius: 999px;
+    }
+    .reiter[aria-selected="true"] { border-color: var(--akzent); }
+  }
+
+  /* ---------- Anzeige ---------- */
+  .kappe {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    margin-bottom: 12px;
+  }
+  .kappe h2 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -.01em; }
+  .pfad {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--tinte-still);
+  }
+  .hinweis {
+    margin: 0 0 16px;
+    max-width: 60ch;
+    font-size: 14px;
+    color: var(--tinte-still);
+  }
+  .hinweis[hidden] { display: none; }
+
+  .rahmen {
+    background: var(--flaeche);
+    border: 1px solid var(--linie);
+    border-radius: 12px;
+    box-shadow: var(--schatten);
+    overflow: hidden;
+  }
+  .leiste {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-bottom: 1px solid var(--linie);
+    background: var(--flaeche-still);
+  }
+  .punkt { width: 9px; height: 9px; border-radius: 50%; background: var(--linie-stark); }
+  .leiste .breite {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--tinte-still);
+  }
+  .rahmen img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+  /* Handy-Aufnahmen sind nur 390 px breit – nicht hochskalieren */
+  .rahmen.handy { max-width: 390px; margin-inline: auto; }
+
+  /* ---------- Fuß ---------- */
+  .fuss {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--linie);
+    font-size: 13.5px;
+    color: var(--tinte-still);
+  }
+  .fuss h2 { font-size: 13px; font-weight: 600; color: var(--tinte); margin: 0 0 8px; }
+  .fuss ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
+  .fuss code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: var(--flaeche-still);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+</style>
+
+<div class="huelle">
+  <header class="kopf">
+    <p class="marke">Entwurf · Stand 23. September 2026</p>
+    <h1>Sybille's Nähparadies</h1>
+    <p>Alle elf Seiten der Webseite, aufgenommen aus dem fertig gebauten Stand. Links die Seite wählen, oben zwischen Desktop und Handy wechseln.</p>
+  </header>
+
+  <div class="steuerung">
+    <span class="zaehler" id="zaehler">Seite 1 von 11</span>
+    <div class="schalter" role="group" aria-label="Ansicht wählen">
+      <button type="button" id="btn-desktop" aria-pressed="true">Desktop</button>
+      <button type="button" id="btn-handy" aria-pressed="false">Handy</button>
+    </div>
+  </div>
+
+  <div class="aufbau">
+    <nav class="liste" id="liste" aria-label="Seiten"></nav>
+
+    <main>
+      <div class="kappe">
+        <h2 id="titel">Startseite</h2>
+        <span class="pfad" id="pfad">/</span>
+      </div>
+      <p class="hinweis" id="hinweis"></p>
+
+      <figure class="rahmen" id="rahmen" style="margin: 0;">
+        <div class="leiste">
+          <span class="punkt"></span><span class="punkt"></span><span class="punkt"></span>
+          <span class="breite" id="breite">1440 px</span>
+        </div>
+        <img id="bild" src="bilder/01-startseite-desktop.jpg" width="1440" height="3452" alt="Startseite in der Desktop-Ansicht">
+      </figure>
+    </main>
+  </div>
+
+  <footer class="fuss">
+    <h2>Was hier noch nicht echt ist</h2>
+    <ul>
+      <li>Der Shop zeigt zehn erfundene Beispielartikel – der Shopify-Store ist noch nicht angelegt.</li>
+      <li>Impressum, Datenschutz, AGB und Widerruf zeigen nur die Struktur. Die verbindlichen Texte kommen von einem Rechtstexte-Anbieter.</li>
+      <li>Produkt- und Kategoriebilder sind selbst erstellte Grafiken, bis es echte Fotos aus dem Laden gibt.</li>
+      <li>Offene Angaben stehen in eckigen Klammern, zum Beispiel <code>[Vollständiger Name der Inhaberin]</code>.</li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+  const seiten = [
+    { gruppe: "Hauptseiten", name: "Startseite", pfad: "/", datei: "01-startseite",
+      hinweis: "" },
+    { gruppe: "Hauptseiten", name: "Shop", pfad: "/shop", datei: "02-shop",
+      hinweis: "Suche und Abteilungsfilter funktionieren. Die Artikel sind Beispiele, solange kein Shopify-Store verbunden ist." },
+    { gruppe: "Hauptseiten", name: "Über uns", pfad: "/ueber-uns", datei: "03-ueber-uns",
+      hinweis: "Sybilles Geschichte fehlt noch – dafür brauche ich ein paar Sätze von ihr." },
+    { gruppe: "Hauptseiten", name: "Besuchen Sie uns", pfad: "/besuchen-sie-uns", datei: "04-besuchen-sie-uns",
+      hinweis: "Die Karte lädt erst nach Klick, damit vor der Einwilligung keine Daten an Dritte gehen." },
+    { gruppe: "Hauptseiten", name: "Kontakt", pfad: "/kontakt", datei: "05-kontakt",
+      hinweis: "Das Formular steht. Der E-Mail-Versand ist noch nicht angeschlossen." },
+    { gruppe: "Bestellung", name: "Warenkorb", pfad: "/warenkorb", datei: "06-warenkorb",
+      hinweis: "Leer, weil kein Shop verbunden ist. Meterware wird später in Metern angezeigt, nicht in Stückzahlen." },
+    { gruppe: "Bestellung", name: "Versand & Zahlung", pfad: "/versand-und-zahlung", datei: "07-versand-und-zahlung",
+      hinweis: "Die Versandpreise sind ein Vorschlag und müssen mit Sybille abgestimmt werden." },
+    { gruppe: "Rechtliches", name: "Impressum", pfad: "/impressum", datei: "08-impressum", hinweis: "" },
+    { gruppe: "Rechtliches", name: "Datenschutz", pfad: "/datenschutz", datei: "09-datenschutz", hinweis: "" },
+    { gruppe: "Rechtliches", name: "AGB", pfad: "/agb", datei: "10-agb", hinweis: "" },
+    { gruppe: "Rechtliches", name: "Widerruf", pfad: "/widerruf", datei: "11-widerruf",
+      hinweis: "Ob zugeschnittene Meterware vom Widerruf ausgenommen werden darf, ist noch von einer Rechtsberatung zu klären." },
+  ];
+
+  // Bildmaße, damit beim Wechseln nichts springt
+  const masse = {
+    "01-startseite-desktop": [1440, 3452], "01-startseite-handy": [390, 4092],
+    "02-shop-desktop": [1440, 5861], "02-shop-handy": [390, 10771],
+    "03-ueber-uns-desktop": [1440, 2631], "03-ueber-uns-handy": [390, 3640],
+    "04-besuchen-sie-uns-desktop": [1440, 2172], "04-besuchen-sie-uns-handy": [390, 2651],
+    "05-kontakt-desktop": [1440, 1669], "05-kontakt-handy": [390, 2553],
+    "06-warenkorb-desktop": [1440, 1000], "06-warenkorb-handy": [390, 1321],
+    "07-versand-und-zahlung-desktop": [1440, 1798], "07-versand-und-zahlung-handy": [390, 2358],
+    "08-impressum-desktop": [1440, 1918], "08-impressum-handy": [390, 2478],
+    "09-datenschutz-desktop": [1440, 2303], "09-datenschutz-handy": [390, 3148],
+    "10-agb-desktop": [1440, 2070], "10-agb-handy": [390, 2751],
+    "11-widerruf-desktop": [1440, 1718], "11-widerruf-handy": [390, 2451],
+  };
+
+  const liste = document.getElementById("liste");
+  const bild = document.getElementById("bild");
+  const rahmen = document.getElementById("rahmen");
+  const titel = document.getElementById("titel");
+  const pfad = document.getElementById("pfad");
+  const hinweis = document.getElementById("hinweis");
+  const breite = document.getElementById("breite");
+  const zaehler = document.getElementById("zaehler");
+  const btnDesktop = document.getElementById("btn-desktop");
+  const btnHandy = document.getElementById("btn-handy");
+
+  let aktiv = 0;
+  let ansicht = "desktop";
+
+  // Seitenliste aufbauen, nach Gruppen
+  const reiter = [];
+  let letzteGruppe = null;
+  let aktuelleListe = null;
+  seiten.forEach((seite, i) => {
+    if (seite.gruppe !== letzteGruppe) {
+      const gruppe = document.createElement("section");
+      gruppe.className = "gruppe";
+      const h = document.createElement("h2");
+      h.textContent = seite.gruppe;
+      aktuelleListe = document.createElement("ul");
+      gruppe.append(h, aktuelleListe);
+      liste.append(gruppe);
+      letzteGruppe = seite.gruppe;
+    }
+    const li = document.createElement("li");
+    const knopf = document.createElement("button");
+    knopf.type = "button";
+    knopf.className = "reiter";
+    knopf.textContent = seite.name;
+    knopf.setAttribute("aria-selected", i === 0 ? "true" : "false");
+    knopf.addEventListener("click", () => zeige(i));
+    li.append(knopf);
+    aktuelleListe.append(li);
+    reiter.push(knopf);
+  });
+
+  function zeige(i) {
+    aktiv = i;
+    const seite = seiten[i];
+    const schluessel = seite.datei + "-" + ansicht;
+    const [w, h] = masse[schluessel];
+
+    bild.width = w;
+    bild.height = h;
+    bild.src = "bilder/" + schluessel + ".jpg";
+    bild.alt = seite.name + " in der " + (ansicht === "desktop" ? "Desktop" : "Handy") + "-Ansicht";
+
+    titel.textContent = seite.name;
+    pfad.textContent = seite.pfad;
+    hinweis.textContent = seite.hinweis;
+    hinweis.hidden = !seite.hinweis;
+    breite.textContent = w + " px";
+    zaehler.textContent = "Seite " + (i + 1) + " von " + seiten.length;
+    rahmen.classList.toggle("handy", ansicht === "handy");
+
+    reiter.forEach((k, j) => k.setAttribute("aria-selected", j === i ? "true" : "false"));
+  }
+
+  function setzeAnsicht(neu) {
+    ansicht = neu;
+    btnDesktop.setAttribute("aria-pressed", String(neu === "desktop"));
+    btnHandy.setAttribute("aria-pressed", String(neu === "handy"));
+    zeige(aktiv);
+  }
+
+  btnDesktop.addEventListener("click", () => setzeAnsicht("desktop"));
+  btnHandy.addEventListener("click", () => setzeAnsicht("handy"));
+
+  zeige(0);
+</script>

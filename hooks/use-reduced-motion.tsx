@@ -1,0 +1,14 @@
+"use client";
+
+import { useReducedMotion } from "motion/react";
+import { motionTokens } from "@/lib/motion-tokens";
+
+export function useSafeMotion(fullY: number = motionTokens.distance.md) {
+  const reduce = useReducedMotion();
+  return {
+    reduce,
+    initial: { opacity: 0, y: reduce ? 0 : fullY },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: reduce ? 0 : -fullY },
+  };
+}

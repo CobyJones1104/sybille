@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+<defs>
+  <pattern id="fl" width="60" height="60" patternUnits="userSpaceOnUse">
+    <g transform="translate(30,30)">
+      <ellipse cx="0" cy="-11" rx="5.5" ry="10" fill="#6f97c6" transform="rotate(0)"/><ellipse cx="0" cy="-11" rx="5.5" ry="10" fill="#6f97c6" transform="rotate(72)"/><ellipse cx="0" cy="-11" rx="5.5" ry="10" fill="#6f97c6" transform="rotate(144)"/><ellipse cx="0" cy="-11" rx="5.5" ry="10" fill="#6f97c6" transform="rotate(216)"/><ellipse cx="0" cy="-11" rx="5.5" ry="10" fill="#6f97c6" transform="rotate(288)"/>
+      <circle r="4.5" fill="#f3ead6"/>
+    </g>
+    <g transform="translate(0,0)">
+      <ellipse cx="0" cy="-7" rx="3.5" ry="6.5" fill="#6f97c6" opacity=".65" transform="rotate(0)"/><ellipse cx="0" cy="-7" rx="3.5" ry="6.5" fill="#6f97c6" opacity=".65" transform="rotate(72)"/><ellipse cx="0" cy="-7" rx="3.5" ry="6.5" fill="#6f97c6" opacity=".65" transform="rotate(144)"/><ellipse cx="0" cy="-7" rx="3.5" ry="6.5" fill="#6f97c6" opacity=".65" transform="rotate(216)"/><ellipse cx="0" cy="-7" rx="3.5" ry="6.5" fill="#6f97c6" opacity=".65" transform="rotate(288)"/>
+    </g>
+    <path d="M44 6c6 4 8 10 6 16-6 1-11-3-12-9 2-4 4-6 6-7z" fill="#71915f" opacity=".8"/>
+    <path d="M12 44c6 3 9 9 7 15-6 1-11-3-13-9 2-3 4-5 6-6z" fill="#71915f" opacity=".6"/>
+  </pattern>
+  
+  <pattern id="wv" width="6" height="6" patternUnits="userSpaceOnUse">
+    <path d="M0 0h6v6H0z" fill="none"/>
+    <path d="M0 3h6M3 0v6" stroke="#000" stroke-opacity="0.07" stroke-width="1"/>
+  </pattern></defs>
+<rect width="400" height="300" fill="#c3d4e8"/>
+<rect width="400" height="300" fill="url(#fl)"/><rect width="400" height="300" fill="url(#wv)"/>
+</svg>

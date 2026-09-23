@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs></defs>
+<rect width="240" height="240" fill="#efe4d3"/>
+
+    <circle cx="86.39999999999999" cy="100.8" r="48" fill="#fbf7f0"/>
+    <circle cx="86.39999999999999" cy="100.8" r="48" fill="none" stroke="#8a7358" stroke-width="2" opacity=".5"/>
+    <circle cx="86.39999999999999" cy="100.8" r="32.64" fill="none" stroke="#8a7358" stroke-width="1.5" opacity=".35"/>
+    <circle cx="72.96" cy="87.36" r="5.28" fill="#8a7358" opacity=".7"/><circle cx="99.83999999999999" cy="87.36" r="5.28" fill="#8a7358" opacity=".7"/><circle cx="72.96" cy="114.24" r="5.28" fill="#8a7358" opacity=".7"/><circle cx="99.83999999999999" cy="114.24" r="5.28" fill="#8a7358" opacity=".7"/>
+     
+    <circle cx="151.2" cy="91.2" r="33.6" fill="#fbf7f0"/>
+    <circle cx="151.2" cy="91.2" r="33.6" fill="none" stroke="#8a7358" stroke-width="2" opacity=".5"/>
+    <circle cx="151.2" cy="91.2" r="22.848000000000003" fill="none" stroke="#8a7358" stroke-width="1.5" opacity=".35"/>
+    <circle cx="141.79199999999997" cy="81.792" r="3.696" fill="#8a7358" opacity=".7"/><circle cx="160.608" cy="81.792" r="3.696" fill="#8a7358" opacity=".7"/><circle cx="141.79199999999997" cy="100.608" r="3.696" fill="#8a7358" opacity=".7"/><circle cx="160.608" cy="100.608" r="3.696" fill="#8a7358" opacity=".7"/>
+     
+    <circle cx="124.80000000000001" cy="163.20000000000002" r="38.4" fill="#fbf7f0"/>
+    <circle cx="124.80000000000001" cy="163.20000000000002" r="38.4" fill="none" stroke="#8a7358" stroke-width="2" opacity=".5"/>
+    <circle cx="124.80000000000001" cy="163.20000000000002" r="26.112000000000002" fill="none" stroke="#8a7358" stroke-width="1.5" opacity=".35"/>
+    <circle cx="114.04800000000002" cy="152.448" r="4.224" fill="#8a7358" opacity=".7"/><circle cx="135.55200000000002" cy="152.448" r="4.224" fill="#8a7358" opacity=".7"/><circle cx="114.04800000000002" cy="173.95200000000003" r="4.224" fill="#8a7358" opacity=".7"/><circle cx="135.55200000000002" cy="173.95200000000003" r="4.224" fill="#8a7358" opacity=".7"/>
+</svg>
