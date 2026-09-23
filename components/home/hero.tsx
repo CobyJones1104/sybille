@@ -53,9 +53,10 @@ export function Hero() {
         </div>
 
         <div aria-hidden="true" className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.55] mix-blend-overlay" />
+        {/* Verlauf nach unten, damit Text und Handlungsaufruf immer auf ruhigem Grund liegen */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[var(--color-foreground)]/40 via-transparent to-[var(--color-foreground)]/80"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[var(--color-foreground)]/40 via-[var(--color-foreground)]/15 to-[var(--color-foreground)]"
         />
 
         <div className="absolute bottom-0 left-0 right-0 px-5 pb-6 sm:px-7 sm:pb-8 md:px-10 md:pb-10">

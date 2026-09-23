@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Info, MessageCircleHeart } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { Button } from "@/components/ui/button";
+import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { ShopHero } from "@/components/shop/shop-hero";
 import { ShopTrustBar } from "@/components/shop/shop-trust-bar";
 import { ShopBrowser } from "@/components/shop/shop-browser";
@@ -61,17 +61,32 @@ export default async function ShopPage() {
       <PopularRow products={products} />
       <PromoDuo />
 
-      <section className="border-t border-[var(--color-border)] bg-[var(--color-background-alt)]">
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 px-6 py-14 text-center">
-          <MessageCircleHeart className="h-7 w-7 text-[var(--color-primary)]" strokeWidth={1.75} aria-hidden="true" />
-          <h2 className="text-xl font-semibold">Etwas nicht gefunden?</h2>
-          <p className="max-w-md text-sm text-[var(--color-muted-foreground)]">
-            Im Laden liegt deutlich mehr als online – schreiben Sie uns einfach, wonach Sie
-            suchen, wir schauen für Sie nach.
-          </p>
-          <Link href="/kontakt">
-            <Button>Nachricht schreiben</Button>
-          </Link>
+      <section className="px-3 pb-12 sm:px-4 md:px-6">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl bg-[var(--color-foreground)] px-6 py-16 text-center text-[var(--color-background-alt)] sm:py-20 md:rounded-[2rem]">
+          <div aria-hidden="true" className="bg-noise pointer-events-none absolute inset-0 opacity-[0.12]" />
+          <div className="relative mx-auto max-w-xl">
+            <MessageCircleHeart
+              className="mx-auto mb-5 h-7 w-7 text-[var(--color-primary)]"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
+            <h2 className="text-2xl leading-[0.95] sm:text-3xl">
+              <WordsPullUpMultiStyle
+                segments={[{ text: "Etwas" }, { text: "nicht gefunden?", className: "font-accent" }]}
+              />
+            </h2>
+            <Reveal delay={0.15}>
+              <p className="mx-auto mt-5 max-w-md text-sm text-[var(--color-background-alt)]/70">
+                Im Laden liegt deutlich mehr als online – schreiben Sie uns einfach, wonach Sie
+                suchen, wir schauen für Sie nach.
+              </p>
+              <div className="mt-8">
+                <ArrowLink href="/kontakt" tone="light">
+                  Nachricht schreiben
+                </ArrowLink>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
     </>

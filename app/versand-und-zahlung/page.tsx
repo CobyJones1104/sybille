@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Truck, Store, Wallet } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
 
 export const metadata: Metadata = {
   title: "Versand & Zahlung – Sybille's Nähparadies",
@@ -18,21 +19,21 @@ const paymentMethods = ["PayPal", "Klarna (Rechnung/Raten)", "SEPA-Lastschrift",
 
 export default function VersandUndZahlungPage() {
   return (
-    <section className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
-      <Reveal className="mb-12 text-center">
-        <h1 className="text-3xl font-semibold sm:text-4xl">Versand &amp; Zahlung</h1>
-        <p className="mt-3 text-sm italic text-[var(--color-muted-foreground)]">
-          Vorläufiger Vorschlag – wird vor Go-live final mit Sybille abgestimmt (siehe
-          docs/konzept.md, Abschnitt e).
-        </p>
-      </Reveal>
+    <>
+      <PageHero
+        label="Bestellung"
+        segments={[{ text: "Versand" }, { text: "& Zahlung.", className: "font-accent" }]}
+        lead="Vorläufiger Vorschlag – wird vor Go-live final mit Sybille abgestimmt (siehe docs/konzept.md, Abschnitt e)."
+      />
+
+      <section className="mx-auto max-w-3xl px-6 py-16">
 
       <Reveal className="mb-12">
-        <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+        <h2 className="mb-5 flex items-center gap-2 text-xl font-bold sm:text-2xl">
           <Truck className="h-5 w-5 text-[var(--color-primary)]" aria-hidden="true" />
           Versand
         </h2>
-        <div className="divide-y divide-[var(--color-border)] rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)]">
+        <div className="divide-y divide-[var(--color-border)] rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] md:rounded-[1.75rem]">
           {shippingTiers.map((tier) => (
             <div key={tier.label + tier.note} className="flex items-center justify-between gap-4 px-5 py-4">
               <div>
@@ -46,7 +47,7 @@ export default function VersandUndZahlungPage() {
       </Reveal>
 
       <Reveal delay={0.1} className="mb-12">
-        <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+        <h2 className="mb-5 flex items-center gap-2 text-xl font-bold sm:text-2xl">
           <Store className="h-5 w-5 text-[var(--color-primary)]" aria-hidden="true" />
           Click &amp; Collect
         </h2>
@@ -57,7 +58,7 @@ export default function VersandUndZahlungPage() {
       </Reveal>
 
       <Reveal delay={0.2}>
-        <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+        <h2 className="mb-5 flex items-center gap-2 text-xl font-bold sm:text-2xl">
           <Wallet className="h-5 w-5 text-[var(--color-primary)]" aria-hidden="true" />
           Zahlarten
         </h2>
@@ -75,6 +76,7 @@ export default function VersandUndZahlungPage() {
           Aus Kundenwunsch bieten wir bewusst keine Kreditkarten- oder Apple-/Google-Pay-Zahlung an.
         </p>
       </Reveal>
-    </section>
+      </section>
+    </>
   );
 }

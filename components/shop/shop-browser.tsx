@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Search, X } from "lucide-react";
 import { ProductCard } from "@/components/shop/product-card";
 import { Reveal } from "@/components/motion/reveal";
+import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
+import { SectionLabel } from "@/components/ui/section-label";
 import { shopCategories } from "@/lib/shop-categories";
 import type { DisplayProduct } from "@/lib/product-display";
 
@@ -26,12 +28,21 @@ export function ShopBrowser({ products }: { products: DisplayProduct[] }) {
   return (
     <>
       <section id="sortiment" className="mx-auto max-w-6xl px-6 pt-16 sm:pt-20">
-        <Reveal className="mb-10 text-center">
-          <h2 className="text-2xl font-semibold sm:text-3xl">Nach Abteilung stöbern</h2>
-          <p className="mt-2 text-[var(--color-muted-foreground)]">
-            Wählen Sie eine Abteilung oder suchen Sie direkt nach einem Artikel.
-          </p>
-        </Reveal>
+        <div className="mb-10 text-center">
+          <Reveal>
+            <SectionLabel>Abteilungen</SectionLabel>
+          </Reveal>
+          <h2 className="mx-auto mt-4 max-w-2xl text-2xl leading-[0.95] sm:text-3xl md:text-4xl">
+            <WordsPullUpMultiStyle
+              segments={[{ text: "Stöbern Sie" }, { text: "in Ruhe", className: "font-accent" }, { text: "durchs Sortiment." }]}
+            />
+          </h2>
+          <Reveal delay={0.15}>
+            <p className="mt-4 text-sm text-[var(--color-muted-foreground)]">
+              Wählen Sie eine Abteilung oder suchen Sie direkt nach einem Artikel.
+            </p>
+          </Reveal>
+        </div>
 
         <Reveal className="mx-auto mb-12 flex max-w-xl items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-5 py-2 focus-within:ring-2 focus-within:ring-[var(--color-ring)]">
           <Search className="h-4 w-4 shrink-0 text-[var(--color-muted-foreground)]" aria-hidden="true" />
@@ -97,7 +108,7 @@ export function ShopBrowser({ products }: { products: DisplayProduct[] }) {
 
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="mb-6 flex items-baseline justify-between gap-4">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-bold">
             {activeCategory ? shopCategories.find((c) => c.match === activeCategory)?.name : "Ganzes Sortiment"}
           </h2>
           <p className="text-sm text-[var(--color-muted-foreground)]">

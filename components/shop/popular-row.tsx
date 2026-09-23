@@ -1,14 +1,24 @@
 import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
+import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
+import { SectionLabel } from "@/components/ui/section-label";
 import type { DisplayProduct } from "@/lib/product-display";
 
 /** Runde Produktbilder mit Rangnummer, Aufbau nach der Layout-Vorlage. */
 export function PopularRow({ products }: { products: DisplayProduct[] }) {
   return (
     <section className="mx-auto max-w-6xl px-6 py-10">
-      <Reveal className="mb-8">
-        <h2 className="text-xl font-semibold">Neu im Sortiment</h2>
-      </Reveal>
+      <div className="mb-10">
+        <Reveal>
+          <SectionLabel>Frisch eingetroffen</SectionLabel>
+        </Reveal>
+        <h2 className="mt-4 text-xl leading-[0.95] sm:text-2xl md:text-3xl">
+          <WordsPullUpMultiStyle
+            className="justify-start text-left"
+            segments={[{ text: "Neu" }, { text: "im Sortiment.", className: "font-accent" }]}
+          />
+        </h2>
+      </div>
       <div className="grid grid-cols-3 gap-5 sm:grid-cols-6">
         {products.slice(0, 6).map((product, i) => (
           <Reveal key={product.id} delay={i * 0.05} className="text-center">

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
+import { SectionLabel } from "@/components/ui/section-label";
 import { ContactForm } from "@/components/kontakt/contact-form";
 import { businessInfo, openingHours } from "@/lib/business-info";
 
@@ -11,25 +13,26 @@ export const metadata: Metadata = {
 
 export default function KontaktPage() {
   return (
-    <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-      <Reveal className="mb-12 text-center">
-        <h1 className="text-3xl font-semibold sm:text-4xl">Kontakt</h1>
-        <p className="mt-3 text-[var(--color-muted-foreground)]">
-          Wir freuen uns über Ihre Nachricht – oder besuchen Sie uns direkt im Laden.
-        </p>
-      </Reveal>
+    <>
+      <PageHero
+        label="Schreiben Sie uns"
+        segments={[{ text: "Wir freuen uns über" }, { text: "Ihre Nachricht.", className: "font-accent" }]}
+        lead="Fragen zu einem Stoff, zur Abholung oder ein Projekt, bei dem Sie nicht weiterkommen? Melden Sie sich gern."
+      />
+
+      <section className="mx-auto max-w-5xl px-6 py-16">
 
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <Reveal>
           <ContactForm />
         </Reveal>
 
-        <Reveal delay={0.1} className="space-y-6">
+        <Reveal delay={0.1} className="space-y-7">
           <div>
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
-              <MapPin className="h-4 w-4" aria-hidden="true" />
+            <SectionLabel className="flex items-center gap-2">
+              <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
               Adresse
-            </p>
+            </SectionLabel>
             <p className="mt-1">
               {businessInfo.name}
               <br />
@@ -40,10 +43,10 @@ export default function KontaktPage() {
           </div>
 
           <div>
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
-              <Phone className="h-4 w-4" aria-hidden="true" />
+            <SectionLabel className="flex items-center gap-2">
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
               Telefon
-            </p>
+            </SectionLabel>
             <p className="mt-1">
               <a href={`tel:${businessInfo.phone.replace(/\s/g, "")}`} className="hover:text-[var(--color-primary)]">
                 {businessInfo.phone}
@@ -53,20 +56,20 @@ export default function KontaktPage() {
           </div>
 
           <div>
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
-              <Mail className="h-4 w-4" aria-hidden="true" />
+            <SectionLabel className="flex items-center gap-2">
+              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
               E-Mail
-            </p>
+            </SectionLabel>
             <p className="mt-1 text-sm italic text-[var(--color-muted-foreground)]">
               Folgt, sobald die Adresse feststeht (siehe offene Fragen in docs/konzept.md).
             </p>
           </div>
 
           <div>
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
-              <Clock className="h-4 w-4" aria-hidden="true" />
+            <SectionLabel className="flex items-center gap-2">
+              <Clock className="h-3.5 w-3.5" aria-hidden="true" />
               Öffnungszeiten
-            </p>
+            </SectionLabel>
             <dl className="mt-1 space-y-1 text-sm">
               {openingHours.map((entry) => (
                 <div key={entry.day} className="flex justify-between gap-4">
@@ -78,6 +81,7 @@ export default function KontaktPage() {
           </div>
         </Reveal>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

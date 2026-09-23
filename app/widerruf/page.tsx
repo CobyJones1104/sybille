@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AlertTriangle } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
 import { LegalNotice } from "@/components/legal/legal-notice";
 import { LegalSection, Placeholder } from "@/components/legal/legal-section";
 
@@ -8,10 +9,10 @@ export const metadata: Metadata = { title: "Widerruf – Sybille's Nähparadies"
 
 export default function WiderrufPage() {
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
-      <Reveal className="mb-8 text-center">
-        <h1 className="text-3xl font-semibold">Widerrufsbelehrung</h1>
-      </Reveal>
+    <>
+      <PageHero label="Rechtliches" segments={[{ text: "Widerrufs" }, { text: "belehrung", className: "font-accent" }]} />
+
+      <section className="mx-auto max-w-2xl px-6 pb-20 pt-4">
 
       <Reveal>
         <LegalNotice />
@@ -53,5 +54,6 @@ export default function WiderrufPage() {
         </LegalSection>
       </Reveal>
     </section>
+    </>
   );
 }

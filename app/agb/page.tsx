@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
 import { LegalNotice } from "@/components/legal/legal-notice";
 import { LegalSection, Placeholder } from "@/components/legal/legal-section";
 
@@ -19,10 +20,10 @@ const sections = [
 
 export default function AgbPage() {
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
-      <Reveal className="mb-8 text-center">
-        <h1 className="text-3xl font-semibold">Allgemeine Geschäftsbedingungen</h1>
-      </Reveal>
+    <>
+      <PageHero label="Rechtliches" segments={[{ text: "Allgemeine" }, { text: "Geschäftsbedingungen", className: "font-accent" }]} />
+
+      <section className="mx-auto max-w-2xl px-6 pb-20 pt-4">
 
       <Reveal>
         <LegalNotice />
@@ -38,5 +39,6 @@ export default function AgbPage() {
         ))}
       </Reveal>
     </section>
+    </>
   );
 }

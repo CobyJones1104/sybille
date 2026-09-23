@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
+import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
+import { SectionLabel } from "@/components/ui/section-label";
 
 export const metadata: Metadata = {
   title: "Über uns / Der Laden – Sybille's Nähparadies Bad Kissingen",
@@ -15,28 +18,29 @@ const galleryPlaceholders = ["Ladenansicht", "Stoffregal", "Beratungstisch", "Sc
 export default function UeberUnsPage() {
   return (
     <>
-      <section className="mx-auto max-w-4xl px-6 py-16 text-center sm:py-20">
-        <Reveal>
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-[var(--color-primary)]">
-            Der Laden
-          </p>
-          <h1 className="text-3xl font-semibold sm:text-4xl">Sybille&apos;s Nähparadies</h1>
-        </Reveal>
-      </section>
+      <PageHero
+        label="Der Laden"
+        segments={[{ text: "Sybille's" }, { text: "Nähparadies", className: "font-accent" }]}
+        lead="Ein Fachgeschäft mitten in Bad Kissingen – für alle, die gern mit den Händen arbeiten."
+      />
 
-      <section className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 px-6 pb-16 md:grid-cols-2 md:gap-14">
+      <section className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 px-6 py-16 md:grid-cols-2 md:gap-14">
+        {/* Gleiche warme Tonung wie im Hero, damit das Foto zur Palette passt */}
         <Reveal className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-[2rem]">
           <Image
             src="/images/team/sybille-portraet.webp"
             alt="Sybille, Inhaberin von Sybille's Nähparadies"
             fill
             sizes="(min-width: 768px) 384px, 320px"
-            className="object-cover"
+            className="object-cover object-[55%_28%]"
+            style={{ filter: "sepia(0.45) saturate(0.8) contrast(1.05) brightness(0.95)" }}
           />
+          <div aria-hidden="true" className="absolute inset-0 bg-[var(--color-primary)] opacity-25 mix-blend-color" />
         </Reveal>
 
         <Reveal delay={0.1}>
-          <h2 className="text-xl font-semibold">Meine Geschichte</h2>
+          <SectionLabel>Hintergrund</SectionLabel>
+          <h2 className="mt-4 text-2xl font-bold sm:text-3xl">Meine Geschichte</h2>
           <p className="mt-3 leading-relaxed text-[var(--color-muted-foreground)]">
             Seit [Jahr/Zeitraum – wird noch ergänzt] führe ich mein Nähparadies in der
             Spargasse in Bad Kissingen. Was als [Platzhalter – z. B. Familienbetrieb /
@@ -53,7 +57,12 @@ export default function UeberUnsPage() {
       <section className="bg-[var(--color-background-alt)]">
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-20">
           <Reveal>
-            <h2 className="text-xl font-semibold">Sybille persönlich</h2>
+            <SectionLabel>Wer dahintersteckt</SectionLabel>
+            <h2 className="mx-auto mt-4 max-w-2xl text-2xl leading-[0.95] sm:text-3xl md:text-4xl">
+              <WordsPullUpMultiStyle
+                segments={[{ text: "Sybille" }, { text: "persönlich.", className: "font-accent" }]}
+              />
+            </h2>
             <p className="mt-3 leading-relaxed text-[var(--color-muted-foreground)]">
               Mit einer Leidenschaft fürs Nähen, die ich gerne weitergebe, berate ich Sie
               persönlich – ob beim ersten eigenen Kleidungsstück oder beim passenden Garn für
@@ -66,8 +75,13 @@ export default function UeberUnsPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-16 text-center sm:py-20">
         <Reveal>
-          <h2 className="text-xl font-semibold">Was den Laden besonders macht</h2>
+          <SectionLabel>Besonderheiten</SectionLabel>
         </Reveal>
+        <h2 className="mx-auto mt-4 max-w-2xl text-2xl leading-[0.95] sm:text-3xl md:text-4xl">
+          <WordsPullUpMultiStyle
+            segments={[{ text: "Was den Laden" }, { text: "besonders macht.", className: "font-accent" }]}
+          />
+        </h2>
         <div className="mt-8 grid grid-cols-1 gap-6 text-left sm:grid-cols-3">
           {[
             {
@@ -83,8 +97,8 @@ export default function UeberUnsPage() {
               text: "Mitten in der Fußgängerzone von Bad Kissingen – ein Ort zum Stöbern und Fragen stellen.",
             },
           ].map((item, i) => (
-            <Reveal key={item.title} delay={i * 0.08} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-              <p className="font-semibold">{item.title}</p>
+            <Reveal key={item.title} delay={i * 0.08} className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 md:rounded-[1.75rem]">
+              <p className="font-bold">{item.title}</p>
               <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">{item.text}</p>
             </Reveal>
           ))}
@@ -94,7 +108,8 @@ export default function UeberUnsPage() {
       <section className="bg-[var(--color-background-alt)]">
         <div className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
           <Reveal className="mb-8 text-center">
-            <h2 className="text-xl font-semibold">Einblicke in den Laden</h2>
+            <SectionLabel className="mb-4">Galerie</SectionLabel>
+            <h2 className="text-2xl font-bold sm:text-3xl">Einblicke in den Laden</h2>
             <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">
               Echte Fotos folgen, sobald sie zur Verfügung stehen.
             </p>

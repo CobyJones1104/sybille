@@ -26,17 +26,21 @@ const items = [
 
 export function TrustBar() {
   return (
-    <section className="border-y border-[var(--color-border)] bg-[var(--color-background-alt)]">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-12 sm:grid-cols-4">
+    <section className="px-3 pb-12 sm:px-4 md:px-6">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[var(--color-border)] sm:grid-cols-4 md:rounded-[2rem]">
         {items.map((item, i) => (
-          <Reveal key={item.title} delay={i * 0.06} className="text-center">
+          <Reveal
+            key={item.title}
+            delay={i * 0.06}
+            className="bg-[var(--color-background-alt)] px-5 py-8 text-center sm:px-6"
+          >
             <item.icon
-              className="mx-auto mb-3 h-7 w-7 text-[var(--color-primary)]"
-              strokeWidth={1.75}
+              className="mx-auto mb-3 h-6 w-6 text-[var(--color-primary)]"
+              strokeWidth={1.5}
               aria-hidden="true"
             />
-            <p className="text-sm font-semibold">{item.title}</p>
-            <p className="mt-1 text-xs text-[var(--color-muted-foreground)]">{item.text}</p>
+            <p className="text-sm font-bold leading-snug">{item.title}</p>
+            <p className="mt-1.5 text-xs text-[var(--color-muted-foreground)]">{item.text}</p>
           </Reveal>
         ))}
       </div>

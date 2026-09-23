@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { MapPin, Clock, PackageCheck, ParkingSquare } from "lucide-react";
+import { Clock, PackageCheck, ParkingSquare } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
+import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
+import { SectionLabel } from "@/components/ui/section-label";
 import { MapEmbed } from "@/components/besuchen/map-embed";
 import { businessInfo, openingHours } from "@/lib/business-info";
 
@@ -13,22 +16,13 @@ export const metadata: Metadata = {
 export default function BesuchenSieUnsPage() {
   return (
     <>
-      <section className="mx-auto max-w-4xl px-6 py-16 text-center sm:py-20">
-        <Reveal>
-          <p className="mb-3 text-sm font-medium uppercase tracking-wide text-[var(--color-primary)]">
-            Anfahrt
-          </p>
-          <h1 className="text-3xl font-semibold sm:text-4xl">
-            Besuchen Sie uns in der Bad Kissinger Fußgängerzone
-          </h1>
-          <p className="mt-4 flex items-center justify-center gap-2 text-[var(--color-muted-foreground)]">
-            <MapPin className="h-5 w-5 shrink-0" aria-hidden="true" />
-            {businessInfo.street}, {businessInfo.postalCode} {businessInfo.city}
-          </p>
-        </Reveal>
-      </section>
+      <PageHero
+        label="Anfahrt"
+        segments={[{ text: "Besuchen Sie uns" }, { text: "in der Fußgängerzone.", className: "font-accent" }]}
+        lead={`${businessInfo.street}, ${businessInfo.postalCode} ${businessInfo.city}`}
+      />
 
-      <section className="mx-auto max-w-5xl px-6 pb-16">
+      <section className="mx-auto max-w-5xl px-6 py-12">
         <Reveal>
           <MapEmbed />
         </Reveal>
@@ -37,10 +31,10 @@ export default function BesuchenSieUnsPage() {
       <section className="bg-[var(--color-background-alt)]">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-6 py-16 sm:py-20 md:grid-cols-2">
           <Reveal>
-            <p className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
-              <Clock className="h-4 w-4" aria-hidden="true" />
+            <SectionLabel className="mb-4 flex items-center gap-2">
+              <Clock className="h-3.5 w-3.5" aria-hidden="true" />
               Öffnungszeiten
-            </p>
+            </SectionLabel>
             <dl className="space-y-1.5 text-sm">
               {openingHours.map((entry) => (
                 <div key={entry.day} className="flex justify-between border-b border-[var(--color-border)] py-1.5 last:border-0">
@@ -52,10 +46,10 @@ export default function BesuchenSieUnsPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <p className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[var(--color-muted-foreground)]">
-              <ParkingSquare className="h-4 w-4" aria-hidden="true" />
+            <SectionLabel className="mb-4 flex items-center gap-2">
+              <ParkingSquare className="h-3.5 w-3.5" aria-hidden="true" />
               Anfahrt &amp; Parken
-            </p>
+            </SectionLabel>
             <p className="text-sm text-[var(--color-muted-foreground)]">
               Die Spargasse liegt in der Fußgängerzone von Bad Kissingen.
               [Platzhalter: Hinweis zu nahegelegenen Parkmöglichkeiten wird noch ergänzt.]
@@ -64,19 +58,28 @@ export default function BesuchenSieUnsPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-6 py-16 text-center sm:py-20">
-        <Reveal>
-          <PackageCheck className="mx-auto mb-4 h-8 w-8 text-[var(--color-primary)]" strokeWidth={1.75} aria-hidden="true" />
-          <h2 className="text-xl font-semibold">Online bestellen, im Laden abholen</h2>
-          <p className="mt-3 leading-relaxed text-[var(--color-muted-foreground)]">
+      <section className="px-3 pb-12 sm:px-4 md:px-6">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-2xl bg-[var(--color-foreground)] px-6 py-16 text-center text-[var(--color-background-alt)] sm:py-20 md:rounded-[2rem]">
+          <div aria-hidden="true" className="bg-noise pointer-events-none absolute inset-0 opacity-[0.12]" />
+          <div className="relative mx-auto max-w-xl">
+          <PackageCheck className="mx-auto mb-5 h-7 w-7 text-[var(--color-primary)]" strokeWidth={1.5} aria-hidden="true" />
+          <h2 className="text-2xl leading-[0.95] sm:text-3xl">
+            <WordsPullUpMultiStyle
+              segments={[{ text: "Online bestellen," }, { text: "im Laden abholen.", className: "font-accent" }]}
+            />
+          </h2>
+          <Reveal delay={0.15}>
+          <p className="mt-5 leading-relaxed text-[var(--color-background-alt)]/70">
             Mit Click &amp; Collect sparen Sie sich den Versand: Bestellen Sie online und holen
             Sie Ihre Ware kostenlos direkt bei uns in der Spargasse ab.
           </p>
-          <p className="mt-2 text-sm italic text-[var(--color-muted-foreground)]">
+          <p className="mt-3 text-sm italic text-[var(--color-background-alt)]/50">
             Bereitstellungszeit wird nach Klärung mit Sybille ergänzt (siehe offene Fragen in
             docs/konzept.md).
           </p>
-        </Reveal>
+          </Reveal>
+          </div>
+        </div>
       </section>
     </>
   );

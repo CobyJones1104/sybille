@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/motion/reveal";
+import { PageHero } from "@/components/layout/page-hero";
 import { LegalNotice } from "@/components/legal/legal-notice";
 import { LegalSection, Placeholder } from "@/components/legal/legal-section";
 import { businessInfo } from "@/lib/business-info";
@@ -8,11 +9,14 @@ export const metadata: Metadata = { title: "Impressum – Sybille's Nähparadies
 
 export default function ImpressumPage() {
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
-      <Reveal className="mb-8 text-center">
-        <h1 className="text-3xl font-semibold">Impressum</h1>
-        <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">Angaben gemäß § 5 DDG</p>
-      </Reveal>
+    <>
+      <PageHero
+        label="Rechtliches"
+        segments={[{ text: "Impressum" }]}
+        lead="Angaben gemäß § 5 DDG"
+      />
+
+      <section className="mx-auto max-w-2xl px-6 pb-20 pt-4">
 
       <Reveal>
         <LegalNotice />
@@ -68,5 +72,6 @@ export default function ImpressumPage() {
         </LegalSection>
       </Reveal>
     </section>
+    </>
   );
 }
