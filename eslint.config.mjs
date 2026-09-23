@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     ".claude/**",
     // Eigenständige Node-Hilfsskripte (CommonJS), laufen nicht im Next.js-Bundle:
     "scripts/**",
+    // Erzeugte statische Vorschau, kein Quellcode:
+    "vorschau/**",
   ]),
 ]);
 

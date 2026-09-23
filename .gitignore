@@ -47,3 +47,6 @@ __pycache__/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+vorschau/
+out/
+.api-waehrend-export/

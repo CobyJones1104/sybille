@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+// In der statischen Vorschau gibt es keinen Server, der das Formular annimmt.
+const istVorschau = process.env.NEXT_PUBLIC_STATIC_PREVIEW === "1";
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -39,6 +42,11 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {istVorschau && (
+        <p className="rounded-xl border border-[var(--color-border)] bg-[var(--color-background-alt)] p-3 text-xs text-[var(--color-muted-foreground)]">
+          Statische Vorschau: Das Formular ist hier nur zur Ansicht, es wird nichts versendet.
+        </p>
+      )}
       {/* Honeypot-Feld gegen Spam: für Menschen unsichtbar, Bots füllen es aus */}
       <input
         type="text"
@@ -86,7 +94,7 @@ export function ContactForm() {
         .
       </p>
 
-      <Button type="submit" disabled={status === "submitting"}>
+      <Button type="submit" disabled={istVorschau || status === "submitting"}>
         {status === "submitting" ? "Wird gesendet …" : "Nachricht senden"}
       </Button>
 
