@@ -50,3 +50,5 @@ next-env.d.ts
 vorschau/
 out/
 .api-waehrend-export/
+vorschau-bilder/
+vorschau-galerie/bilder/
