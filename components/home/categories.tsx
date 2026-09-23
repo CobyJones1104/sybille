@@ -1,16 +1,7 @@
 import Link from "next/link";
-import { Shirt, CircleDot, Tag, Link2, Ruler, BookOpen } from "lucide-react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
-
-// Icons sind Platzhalter (Lucide) – finale Iconauswahl folgt in der Feinschliff-Phase.
-const categories = [
-  { icon: Shirt, name: "Stoffe", href: "/shop" },
-  { icon: CircleDot, name: "Wolle & Garne", href: "/shop" },
-  { icon: Tag, name: "Kurzwaren", href: "/shop" },
-  { icon: Link2, name: "Reißverschlüsse", href: "/shop" },
-  { icon: Ruler, name: "Nähzubehör", href: "/shop" },
-  { icon: BookOpen, name: "Schnittmuster", href: "/shop" },
-];
+import { shopCategories } from "@/lib/shop-categories";
 
 export function Categories() {
   return (
@@ -22,17 +13,17 @@ export function Categories() {
         </p>
       </Reveal>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
-        {categories.map((cat, i) => (
-          <Reveal key={cat.name} delay={i * 0.06}>
+      <div className="grid grid-cols-3 gap-4 sm:grid-cols-6">
+        {shopCategories.map((category, i) => (
+          <Reveal key={category.name} delay={i * 0.06}>
             <Link
-              href={cat.href}
-              className="group flex flex-col items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-6 text-center transition-colors duration-200 hover:bg-[var(--color-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-ring)]"
+              href="/shop"
+              className="group flex flex-col items-center gap-3 text-center focus-visible:outline-none"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-background-alt)] transition-transform duration-200 group-hover:-translate-y-0.5">
-                <cat.icon className="h-6 w-6 text-[var(--color-primary)]" strokeWidth={1.75} aria-hidden="true" />
+              <span className="relative block h-20 w-20 overflow-hidden rounded-full ring-2 ring-[var(--color-border)] transition-all duration-200 group-hover:-translate-y-0.5 group-hover:ring-[var(--color-primary)] group-focus-visible:ring-[var(--color-ring)] sm:h-24 sm:w-24">
+                <Image src={category.image} alt="" fill sizes="96px" className="object-cover" />
               </span>
-              <span className="text-sm font-medium">{cat.name}</span>
+              <span className="text-xs font-medium sm:text-sm">{category.name}</span>
             </Link>
           </Reveal>
         ))}

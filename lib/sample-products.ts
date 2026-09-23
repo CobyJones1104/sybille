@@ -16,6 +16,7 @@ export interface SampleProduct {
   material: string;
   width: string;
   care: string;
+  image: string;
 }
 
 export const sampleProducts: SampleProduct[] = [
@@ -32,6 +33,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "100% Baumwolle",
     width: "140 cm",
     care: "waschbar bis 40°C",
+    image: "/images/shop/baumwollstoff-blumenwiese-blau.svg",
   },
   {
     id: "jersey-uni-anthrazit",
@@ -46,6 +48,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "95% Baumwolle, 5% Elasthan",
     width: "155 cm",
     care: "waschbar bis 30°C",
+    image: "/images/shop/jersey-uni-anthrazit.svg",
   },
   {
     id: "walkstoff-tannengruen",
@@ -60,6 +63,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "100% Schurwolle",
     width: "150 cm",
     care: "nur Trockenreinigung",
+    image: "/images/shop/walkstoff-tannengruen.svg",
   },
   {
     id: "dekostoff-streifen-natur",
@@ -74,6 +78,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "55% Baumwolle, 45% Polyester",
     width: "280 cm",
     care: "waschbar bis 30°C",
+    image: "/images/shop/dekostoff-streifen-natur.svg",
   },
   {
     id: "sockenwolle-bunt-melange",
@@ -88,6 +93,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "75% Schurwolle, 25% Polyamid",
     width: "–",
     care: "handwäschebar",
+    image: "/images/shop/sockenwolle-bunt-melange.svg",
   },
   {
     id: "babywolle-weiss-weich",
@@ -102,6 +108,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "100% Merinowolle (mulesing-frei)",
     width: "–",
     care: "waschbar bis 30°C Feinwäsche",
+    image: "/images/shop/babywolle-weiss-weich.svg",
   },
   {
     id: "perlmuttknoepfe-15mm-set",
@@ -116,6 +123,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "Perlmutt",
     width: "15 mm Durchmesser",
     care: "–",
+    image: "/images/shop/perlmuttknoepfe-15mm-set.svg",
   },
   {
     id: "baumwollband-karo-rot",
@@ -130,6 +138,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "100% Baumwolle",
     width: "2,5 cm",
     care: "waschbar bis 40°C",
+    image: "/images/shop/baumwollband-karo-rot.svg",
   },
   {
     id: "reissverschluss-teilbar-60cm-schwarz",
@@ -144,6 +153,7 @@ export const sampleProducts: SampleProduct[] = [
     material: "Kunststoff-Spirale",
     width: "60 cm Länge",
     care: "–",
+    image: "/images/shop/reissverschluss-teilbar-60cm-schwarz.svg",
   },
   {
     id: "schneiderschere-profi-25cm",
@@ -158,5 +168,6 @@ export const sampleProducts: SampleProduct[] = [
     material: "rostfreier Stahl",
     width: "25 cm Länge",
     care: "trocken lagern",
+    image: "/images/shop/schneiderschere-profi-25cm.svg",
   },
 ];

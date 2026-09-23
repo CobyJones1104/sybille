@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Drittanbieter-Skill-Skripte, kein eigener Projektcode:
     ".claude/**",
+    // Eigenständige Node-Hilfsskripte (CommonJS), laufen nicht im Next.js-Bundle:
+    "scripts/**",
   ]),
 ]);
 

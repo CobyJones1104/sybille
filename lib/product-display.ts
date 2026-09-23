@@ -28,8 +28,8 @@ export function sampleProductToDisplay(product: SampleProduct): DisplayProduct {
     minQuantity: product.minQuantity,
     stepQuantity: product.stepQuantity,
     description: product.description,
-    imageUrl: null,
-    imageAlt: null,
+    imageUrl: product.image,
+    imageAlt: `${product.name} – ${product.category} bei Sybille's Nähparadies`,
     variantId: null,
   };
 }
