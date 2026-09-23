@@ -6,15 +6,20 @@
 const API_VERSION = "2025-01";
 
 interface ShopifyConfig {
-  domain: string;
+  baseUrl: string;
   token: string;
 }
 
 function getConfig(): ShopifyConfig | null {
-  const domain = process.env.SHOPIFY_STORE_DOMAIN;
-  const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+  const domain = process.env.SHOPIFY_STORE_DOMAIN?.trim();
+  const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN?.trim();
   if (!domain || !token) return null;
-  return { domain, token };
+
+  // Toleriert "shop.myshopify.com" ebenso wie "https://shop.myshopify.com/"
+  // (beides wird beim Einrichten leicht verwechselt) und erlaubt http für
+  // lokale Tests gegen den Simulator aus scripts/mock-shopify.js.
+  const withScheme = /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
+  return { baseUrl: withScheme.replace(/\/+$/, ""), token };
 }
 
 export function isShopifyConfigured(): boolean {
@@ -39,7 +44,7 @@ export async function shopifyFetch<T>({ query, variables, cache = "force-cache" 
     );
   }
 
-  const response = await fetch(`https://${config.domain}/api/${API_VERSION}/graphql.json`, {
+  const response = await fetch(`${config.baseUrl}/api/${API_VERSION}/graphql.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

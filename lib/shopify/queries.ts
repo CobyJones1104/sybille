@@ -88,6 +88,9 @@ const CART_FIELDS = `
             product {
               title
               handle
+              stepMeters: metafield(namespace: "custom", key: "step_meters") {
+                value
+              }
             }
           }
         }

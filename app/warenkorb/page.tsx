@@ -6,9 +6,31 @@ import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { useCart } from "@/components/cart/cart-context";
+import { shopifyQuantityToMeters } from "@/lib/shopify/meterware";
+import type { ShopifyCartLine } from "@/lib/shopify/types";
 
 function formatMoney(amount: string, currency: string) {
   return new Intl.NumberFormat("de-DE", { style: "currency", currency }).format(Number.parseFloat(amount));
+}
+
+/**
+ * Shopify zählt Meterware in ganzen Schritten (z. B. 3 × 0,5 m). Für die
+ * Kundin ist aber nur die Meterzahl verständlich, deshalb wird hier
+ * zurückgerechnet. Ohne Schrittweiten-Metafeld bleibt es bei Stückzahlen.
+ */
+function describeQuantity(line: ShopifyCartLine): { value: string; isMeterware: boolean } {
+  const rawStep = line.merchandise.product.stepMeters?.value;
+  const step = rawStep ? Number.parseFloat(rawStep) : NaN;
+
+  if (!Number.isFinite(step) || step <= 0) {
+    return { value: String(line.quantity), isMeterware: false };
+  }
+
+  const meters = shopifyQuantityToMeters(line.quantity, step);
+  return {
+    value: `${meters.toFixed(meters % 1 === 0 ? 0 : 1).replace(".", ",")} m`,
+    isMeterware: true,
+  };
 }
 
 export default function WarenkorbPage() {
@@ -54,12 +76,18 @@ export default function WarenkorbPage() {
       </div>
 
       <Reveal className="divide-y divide-[var(--color-border)] rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] md:rounded-[1.75rem]">
-        {cart.lines.map((line) => (
+        {cart.lines.map((line) => {
+          const quantity = describeQuantity(line);
+          return (
           <div key={line.id} className="flex items-center gap-4 px-5 py-4">
             <div className="flex-1">
               <p className="font-medium">{line.merchandise.product.title}</p>
-              {line.merchandise.title !== "Default Title" && (
-                <p className="text-sm text-[var(--color-muted-foreground)]">{line.merchandise.title}</p>
+              {quantity.isMeterware ? (
+                <p className="text-sm text-[var(--color-muted-foreground)]">Zuschnitt nach Maß</p>
+              ) : (
+                line.merchandise.title !== "Default Title" && (
+                  <p className="text-sm text-[var(--color-muted-foreground)]">{line.merchandise.title}</p>
+                )
               )}
             </div>
 
@@ -73,7 +101,7 @@ export default function WarenkorbPage() {
               >
                 <Minus className="h-3.5 w-3.5" aria-hidden="true" />
               </button>
-              <span className="min-w-8 text-center text-sm tabular-nums">{line.quantity}</span>
+              <span className="min-w-14 text-center text-sm tabular-nums">{quantity.value}</span>
               <button
                 type="button"
                 aria-label="Menge erhöhen"
@@ -99,7 +127,8 @@ export default function WarenkorbPage() {
               <X className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
-        ))}
+          );
+        })}
       </Reveal>
 
       <Reveal delay={0.1} className="mt-8 flex items-center justify-between border-t border-[var(--color-border)] pt-6">

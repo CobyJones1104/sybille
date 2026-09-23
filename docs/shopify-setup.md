@@ -46,10 +46,33 @@ nicht direkt. Lösung ohne Zusatz-App:
 2. Bei jedem Meterware-Produkt den Wert setzen, z. B. `0.5` für 0,5-Meter-Schritte.
 3. Den **Variantenpreis** als Preis *pro Schritt* eintragen (bei 0,5-m-Schritten also den
    Preis für einen halben Meter, nicht für den ganzen Meter).
+   > ⚠️ **Hier bitte genau hinschauen:** Wird versehentlich der Meterpreis eingetragen,
+   > zahlen Kundinnen bei 0,5-m-Schritten den doppelten Preis. Die vorbereitete
+   > Importdatei (Abschnitt 4a) rechnet das bereits korrekt um.
 4. Der Code rechnet automatisch um: Kundin wählt „1,5 m“ im Mengenwähler →
    `lib/shopify/meterware.ts` rechnet das in „3 Einheiten à 0,5 m“ für Shopify um.
 
 Produkte **ohne** dieses Metafeld werden automatisch als normale Stückware behandelt.
+
+## 4a. Produkte per Datei importieren (spart das Eintippen)
+Statt jedes Produkt einzeln anzulegen, lässt sich `docs/shopify-produktimport.csv`
+direkt hochladen: Shopify-Adminbereich → **Produkte → Importieren → Datei auswählen**.
+
+Die Datei wird erzeugt aus `docs/produkte-vorlage.csv`:
+```bash
+node scripts/generate-shopify-import.js
+```
+Sobald Sybille die Vorlage mit den echten Artikeln füllt, einfach neu erzeugen und importieren.
+
+Was die Datei schon richtig macht:
+- Meterware-Preise sind auf den Schritt heruntergerechnet (9,90 €/m → 4,95 € pro 0,5 m)
+- Schrittweite steht im Metafeld `custom.step_meters`
+- Beschreibung, Material, Breite und Pflegehinweis stehen im Produkttext
+- Alle Produkte stehen auf **Entwurf** (`draft`), gehen also nicht versehentlich sofort live
+
+Falls Shopify die Metafeld-Spalte beim Import nicht annimmt (die Schreibweise der
+Spaltenüberschrift ändert sich gelegentlich): Produkte trotzdem importieren und die
+Schrittweite anschließend je Meterware-Produkt von Hand im Metafeld setzen.
 
 ## 5. Zahlarten einrichten (Vorgabe: keine Kreditkarte, kein Apple/Google Pay)
 Unter **Einstellungen → Zahlungen**:
@@ -65,6 +88,30 @@ Unter **Einstellungen → Zahlungen**:
 Unter **Einstellungen → Versand und Zustellung**:
 - Versandstaffel nach dem Vorschlag in `docs/konzept.md` (Abschnitt e) anlegen.
 - **Lokale Abholung** aktivieren und auf 0 € setzen → das bildet „Click & Collect“ ab.
+
+## 6a. Was bereits getestet ist – und was nicht
+Die Anbindung wurde gegen einen **Simulator** der Storefront-API geprüft
+(`scripts/mock-shopify.js`), weil für einen echten Test ein kostenpflichtiger Store
+nötig wäre. So lässt sich der Weg jederzeit ohne Shopify-Konto nachspielen:
+
+```bash
+node scripts/mock-shopify.js          # Terminal 1
+# .env.local:
+#   SHOPIFY_STORE_DOMAIN=http://localhost:4000
+#   SHOPIFY_STOREFRONT_ACCESS_TOKEN=test-token
+npm run dev                           # Terminal 2
+```
+
+Nachgewiesen funktioniert damit:
+- Produkte werden geladen und ersetzen automatisch die Demo-Vorschau
+- „In den Warenkorb" legt einen Warenkorb an, das Symbol oben zeigt die Anzahl
+- Meterware rechnet korrekt: 1,5 m → 3 Einheiten à 0,5 m → 14,85 € bei 4,95 € je Schritt
+- Menge ändern und Position entfernen aktualisieren die Zwischensumme
+- Der Button „Zur Kasse" führt auf die Checkout-Adresse des Warenkorbs
+
+**Noch offen und nur mit echtem Store prüfbar:** der eigentliche Bezahlvorgang,
+die Zahlarten, Versandberechnung und die Bestellbestätigung per E-Mail. Vor dem
+Go-live unbedingt eine Testbestellung über Shopifys Test-Zahlungsart durchführen.
 
 ## 7. Nach der Einrichtung
 - `npm run build` laufen lassen, um sicherzustellen, dass die Seite mit echten Daten fehlerfrei baut.

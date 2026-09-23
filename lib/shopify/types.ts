@@ -44,7 +44,12 @@ export interface ShopifyCartLine {
   merchandise: {
     id: string;
     title: string;
-    product: { title: string; handle: string };
+    product: {
+      title: string;
+      handle: string;
+      /** Schrittweite in Metern, falls Meterware – siehe ShopifyProduct.stepMeters. */
+      stepMeters: { value: string } | null;
+    };
     price: ShopifyMoney;
   };
   cost: { totalAmount: ShopifyMoney };
