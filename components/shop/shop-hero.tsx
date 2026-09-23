@@ -24,7 +24,7 @@ export function ShopHero({ products }: { products: DisplayProduct[] }) {
   const highlights = products.slice(0, 4);
 
   return (
-    <section className="relative overflow-hidden bg-[var(--color-foreground)] text-white">
+    <section className="relative -mt-16 overflow-hidden bg-[var(--color-foreground)] pt-16 text-white md:-mt-[4.5rem] md:pt-[4.5rem]">
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-6 py-16 md:grid-cols-[0.9fr_1.1fr] md:py-20">
         <motion.div
           initial={{ opacity: 0, y: animate ? 16 : 0 }}

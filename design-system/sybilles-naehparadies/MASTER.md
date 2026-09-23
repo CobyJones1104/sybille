@@ -29,29 +29,49 @@ Kontrastprüfung (rechnerisch verifiziert): `#362A22` auf `#FBF7F0` = 13.0:1, `#
 
 ## Typografie
 
-- **Überschriften:** Playfair Display (elegant, warm, hohe Lesbarkeit auch bei großen Schriftgrößen, wirkt hochwertig ohne kalt zu sein)
-- **Fließtext/UI:** Inter (sehr gut lesbar, neutral, harmoniert mit Playfair)
-- Beide Schriften werden über `next/font/google` lokal eingebunden (kein Google-CDN, siehe CLAUDE.md-Hartregel).
-- Skalierung: H1 40–56px / H2 28–32px / H3 22–24px / Body 16–18px / Meta-Text 14px, Zeilenhöhe Body 1,5.
+- **Global:** Almarai (Gewichte 300/400/700/800) – für Fließtext **und** Überschriften
+- **Akzent:** Instrument Serif, nur kursiv – für hervorgehobene Wortgruppen in großen
+  Überschriften (Utility-Klasse `.font-accent`)
+- Beide über `next/font/google` lokal gebündelt (kein Google-CDN, siehe CLAUDE.md).
+- Deutsche Sonderzeichen (ä, ö, ü, ß, €) wurden in beiden Schriften im Browser geprüft
+  und werden korrekt dargestellt.
+- Skalierung: Hero-Wortmarke 11,5–12,5vw / H2 28–60px / Body 14–18px, Zeilenhöhe Body 1,5.
 
 ```ts
-// app/fonts.ts (Next.js next/font/google – lokal gebündelt, kein CDN-Request)
-import { Playfair_Display, Inter } from "next/font/google";
+// app/fonts.ts
+import { Almarai, Instrument_Serif } from "next/font/google";
 
-export const playfair = Playfair_Display({
+export const almarai = Almarai({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-export const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "700", "800"],
   variable: "--font-body",
   display: "swap",
 });
+
+export const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-accent",
+  display: "swap",
+});
 ```
+
+## Hero- und Abschnittsmuster (Layout-Vorlage „Prisma")
+
+- **Navigation:** dunkle Pille, die mittig von der Oberkante herabhängt (`rounded-b-2xl`),
+  liegt absolut über dem Inhalt; `main` hat dafür `pt-16`, vollflächige Heros heben das
+  mit `-mt-16` wieder auf.
+- **Hero:** volle Bildschirmhöhe mit Innenabstand (`p-3 md:p-6`), darin ein abgerundeter
+  Vollbild-Bereich (`rounded-2xl md:rounded-[2rem]`). Inhalt unten ausgerichtet im
+  12-Spalten-Raster: große Wortmarke links (8 Spalten), Kurztext + Handlungsaufruf rechts
+  (4 Spalten). Rauschtextur (`.noise-overlay`) und Verlauf nach unten für die
+  filmische Anmutung.
+- **Handlungsaufruf:** Pille mit dunklem Kreis und Pfeil, beim Überfahren wächst der
+  Abstand und der Kreis skaliert leicht.
+- **Zweite Sparte:** dunkle Karte auf hellem Grund, kleines Label in Versalien,
+  mehrstilige Überschrift mit kursivem Serif-Akzent, darunter ein Fließtext, dessen
+  Zeichen beim Scrollen nacheinander aufklaren.
 
 ## Formsprache
 - Radius: großzügig, aber nicht verspielt – Karten `radius-lg` (16px), Buttons `radius-full` (Pill-Form, siehe Bild 2), Bilder `radius-md` (12px).

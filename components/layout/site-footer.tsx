@@ -26,7 +26,7 @@ export function SiteFooter() {
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-background-alt)]">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-10 px-6 py-14 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-[family-name:var(--font-heading)] text-lg font-semibold">
+          <p className="text-lg font-bold tracking-tight">
             {businessInfo.name}
           </p>
           <p className="mt-2 text-sm text-[var(--color-muted-foreground)]">{businessInfo.slogan}</p>

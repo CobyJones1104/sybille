@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { playfair, inter } from "@/app/fonts";
+import { almarai, instrumentSerif } from "@/app/fonts";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { CartProvider } from "@/components/cart/cart-context";
@@ -39,7 +39,7 @@ const localBusinessSchema = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="de" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
+    <html lang="de" className={`${almarai.variable} ${instrumentSerif.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
@@ -47,7 +47,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <CartProvider>
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          {/* Die Navigations-Pille liegt absolut über dem Inhalt; hier der Platz dafür.
+              Vollflächige Hero-Bereiche heben das mit -mt-16 wieder auf. */}
+          <main className="flex-1 pt-16 md:pt-[4.5rem]">{children}</main>
           <SiteFooter />
         </CartProvider>
       </body>

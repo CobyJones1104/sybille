@@ -1,33 +1,39 @@
-import Image from "next/image";
+import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
+import { ScrollRevealText } from "@/components/motion/scroll-reveal-text";
 import { Reveal } from "@/components/motion/reveal";
 
+const BODY_TEXT =
+  "Bei mir finden Sie nicht einfach Stoffe von der Rolle, sondern jemanden, der mit Ihnen zusammen den richtigen Stoff, das passende Garn oder den letzten Handgriff für Ihr Projekt sucht – ob Sie gerade anfangen oder schon lange an der Nähmaschine sitzen.";
+
 /**
- * Kurzvorstellung von Sybille direkt unter dem Header.
- * Text aus docs/konzept.md (Abschnitt b) – Platzhalter, die noch mit
- * echten Angaben (Zeitraum, Geschichte) ergänzt werden, siehe offene Fragen.
+ * Zweite Sparte im Aufbau der Layout-Vorlage: dunkle Karte, kleines Label,
+ * mehrstilige Überschrift mit kursivem Serif-Akzent, danach ein Fließtext,
+ * dessen Zeichen beim Scrollen nach und nach aufklaren.
  */
 export function Intro() {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-16 text-center sm:py-20">
-      <Reveal>
-        <div className="mx-auto mb-6 h-20 w-20 overflow-hidden rounded-full ring-4 ring-[var(--color-background-alt)]">
-          <Image
-            src="/images/team/sybille-portraet.webp"
-            alt="Sybille, Inhaberin von Sybille's Nähparadies"
-            width={80}
-            height={80}
-            className="h-full w-full object-cover"
-            style={{ objectPosition: "52% 32%" }}
-          />
-        </div>
-        <h2 className="text-2xl font-semibold sm:text-3xl">Willkommen bei mir im Laden</h2>
-        <p className="mt-5 text-base leading-relaxed text-[var(--color-muted-foreground)] sm:text-lg">
-          Bei mir finden Sie nicht einfach Stoffe von der Rolle, sondern jemanden, der mit
-          Ihnen zusammen den richtigen Stoff, das passende Garn oder den letzten Handgriff
-          für Ihr Projekt sucht. Mit einer Leidenschaft fürs Nähen, die ich gerne weitergebe
-          – ob Sie Anfängerin sind oder schon lange an der Nähmaschine sitzen.
+    <section className="bg-[var(--color-background)] px-3 py-12 sm:px-4 sm:py-16 md:px-6">
+      <Reveal className="mx-auto max-w-6xl rounded-2xl bg-[#2c231c] px-6 py-16 text-center sm:py-20 md:rounded-[2rem] md:py-24">
+        <p className="mb-6 text-[10px] uppercase tracking-[0.2em] text-[var(--color-primary)] sm:text-xs">
+          Stoffe &amp; Wolle
         </p>
-        <p className="mt-3 text-sm text-[var(--color-muted-foreground)] italic">
+
+        <h2 className="mx-auto max-w-3xl text-3xl leading-[0.95] text-[var(--color-background-alt)] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl">
+          <WordsPullUpMultiStyle
+            segments={[
+              { text: "Ich bin Sybille," },
+              { text: "mein Laden liegt mitten in Bad Kissingen.", className: "font-accent" },
+              { text: "Stoffe, Wolle, Kurzwaren – und Beratung, die weiterhilft." },
+            ]}
+          />
+        </h2>
+
+        <ScrollRevealText
+          text={BODY_TEXT}
+          className="mx-auto mt-10 max-w-2xl justify-center text-xs leading-relaxed text-[var(--color-background-alt)] sm:text-sm md:text-base"
+        />
+
+        <p className="mt-6 text-xs italic text-[var(--color-background-alt)]/50">
           Platzhaltertext – wird mit echten Angaben zu Sybille und der Geschichte des Ladens ergänzt.
         </p>
       </Reveal>
