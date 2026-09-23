@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ImageOff, Check } from "lucide-react";
+import { ImageOff, Check, Info } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { QuantityStepper } from "@/components/shop/quantity-stepper";
 import { useCart } from "@/components/cart/cart-context";
 import { metersToShopifyQuantity } from "@/lib/shopify/meterware";
+import {
+  meterwareIstVomWiderrufAusgeschlossen,
+  MeterwareWiderrufHinweis,
+} from "@/lib/widerruf";
 import type { DisplayProduct } from "@/lib/product-display";
 
 const unitLabel: Record<DisplayProduct["unit"], string> = {
@@ -21,6 +25,9 @@ export function ProductCard({ product, delay = 0 }: { product: DisplayProduct; d
   const { addItem, isLoading, isConfigured } = useCart();
 
   const canOrder = Boolean(product.variantId) && isConfigured;
+  // Bei ausgeschlossenem Widerruf muss der Hinweis vor dem Kauf sichtbar sein.
+  const zeigeWiderrufHinweis =
+    product.unit === "Meter" && meterwareIstVomWiderrufAusgeschlossen();
 
   async function handleAddToCart() {
     if (!product.variantId) return;
@@ -58,6 +65,12 @@ export function ProductCard({ product, delay = 0 }: { product: DisplayProduct; d
             <span className="text-xs font-normal text-[var(--color-muted-foreground)]">{unitLabel[product.unit]}</span>
           </p>
         </div>
+        {zeigeWiderrufHinweis && (
+          <p className="flex items-start gap-1.5 text-xs text-[var(--color-muted-foreground)]">
+            <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            {MeterwareWiderrufHinweis.kurz}
+          </p>
+        )}
         <QuantityStepper
           value={quantity}
           min={product.minQuantity}

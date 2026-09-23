@@ -1,12 +1,16 @@
 "use client";
 
-import { Minus, Plus, X, ShoppingBag, ArrowRight } from "lucide-react";
+import { Minus, Plus, X, ShoppingBag, ArrowRight, Info } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { WordsPullUpMultiStyle } from "@/components/motion/words-pull-up";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { useCart } from "@/components/cart/cart-context";
 import { shopifyQuantityToMeters } from "@/lib/shopify/meterware";
+import {
+  meterwareIstVomWiderrufAusgeschlossen,
+  MeterwareWiderrufHinweis,
+} from "@/lib/widerruf";
 import type { ShopifyCartLine } from "@/lib/shopify/types";
 
 function formatMoney(amount: string, currency: string) {
@@ -64,6 +68,12 @@ export default function WarenkorbPage() {
     );
   }
 
+  const enthaeltMeterware = cart.lines.some((line) => {
+    const step = Number.parseFloat(line.merchandise.product.stepMeters?.value ?? "");
+    return Number.isFinite(step) && step > 0;
+  });
+  const zeigeWiderrufHinweis = enthaeltMeterware && meterwareIstVomWiderrufAusgeschlossen();
+
   return (
     <section className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
       <div className="mb-12 text-center">
@@ -74,6 +84,13 @@ export default function WarenkorbPage() {
           <WordsPullUpMultiStyle segments={[{ text: "Waren" }, { text: "korb.", className: "font-accent" }]} />
         </h1>
       </div>
+
+      {zeigeWiderrufHinweis && (
+        <Reveal className="mb-5 flex items-start gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-background-alt)] p-4 text-sm text-[var(--color-muted-foreground)]">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" aria-hidden="true" />
+          <p>{MeterwareWiderrufHinweis.lang}</p>
+        </Reveal>
+      )}
 
       <Reveal className="divide-y divide-[var(--color-border)] rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] md:rounded-[1.75rem]">
         {cart.lines.map((line) => {
